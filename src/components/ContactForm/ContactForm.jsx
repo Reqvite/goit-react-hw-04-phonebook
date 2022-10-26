@@ -1,21 +1,19 @@
-import { Formik } from "formik";
 import PropTypes from 'prop-types';
 
 import { FormStyled, Label, Input, Button } from "./ContactForm.style";
 
 
-export const ContactForm = (({ name, number, getData }) => {
+export const ContactForm = (({getData }) => {
 
     return (
-    <Formik  initialValues={{ name, number }} onSubmit={getData}>
-   <FormStyled>
+   <FormStyled onSubmit={getData}>
  <Label htmlFor="name">Name
    <Input
   type="text"
    name="name"
     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  required                    
+            required             
       />
     </Label>
      <Label htmlFor="number">Number
@@ -24,19 +22,16 @@ export const ContactForm = (({ name, number, getData }) => {
   name="number"
   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
   title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  required                   
+            required        
       />
       </Label>
     <Button type='submit'>Add contact</Button>
     </FormStyled>
-    </Formik>
     )
 })
 
 
 ContactForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
   getData: PropTypes.func.isRequired,
 }
 
