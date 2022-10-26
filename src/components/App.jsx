@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { ThemeProvider } from 'styled-components'
 import { theme } from 'theme/theme';
@@ -57,17 +57,13 @@ export const App = () => {
   }
 
   const renderFilterList = () => {
-      return contacts
-        .map(contact => contact)
-      .filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase()))
-    
+    return contacts
+      .filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase())) 
   }
 
-//   deleteContact = (id) => {
-//     this.setState(({contacts}) => ({
-//       contacts: contacts.filter((contact => contact.id !== id)),
-//    }))
-//  }
+  const deleteContact = id => {
+    setContacts(contacts.filter((contact => contact.id !== id)))
+  }
 
   return (
          <ThemeProvider theme={theme}>
@@ -76,11 +72,8 @@ export const App = () => {
         <ContactForm  getData={handleSubmit}/>
         <SecondaryTitle title='Contacts' />
         <Filter title='Find contacts by name' handleFilter={handleFilter} />
-        <ContactList filterContacts={renderFilterList()} contacts={contacts} />
+        <ContactList filterContacts={renderFilterList()} contacts={contacts} deleteContact={deleteContact} />
       </Container>
       </ThemeProvider>
-  ) 
-
-  
+  )  
 }
-
